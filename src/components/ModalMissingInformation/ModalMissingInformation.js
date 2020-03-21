@@ -79,7 +79,7 @@ class ModalMissingInformation extends Component {
       const emailVerificationNeeded = hasListingsOrOrders && emailUnverified;
 
       const stripeAccountMissing = !!currentUser.id && !currentUser.attributes.stripeConnected;
-      const stripeAccountNeeded = currentUserHasListings && stripeAccountMissing;
+      const stripeAccountNeeded = false;
 
       // Show reminder
       if (emailVerificationNeeded) {

@@ -151,6 +151,12 @@ const EditListingWizardTab = props => {
     }
   };
 
+  const publishListing = () => {
+    if (isNewListingFlow) {
+      handlePublishListing(currentListing.id);
+    }
+  };
+
   const panelProps = tab => {
     return {
       className: css.panel,
@@ -254,8 +260,8 @@ const EditListingWizardTab = props => {
             // so that it doesn't close its modal if an error is thrown.
             return onCompleteEditListingWizardTab(tab, values, true);
           }}
-          onNextTab={() =>
-            redirectAfterDraftUpdate(listing.id.uuid, params, tab, marketplaceTabs, history)
+          onNextTab={() => publishListing()
+            //redirectAfterDraftUpdate(listing.id.uuid, params, tab, marketplaceTabs, history)
           }
         />
       );

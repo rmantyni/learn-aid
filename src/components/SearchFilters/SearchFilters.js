@@ -53,6 +53,7 @@ const SearchFiltersComponent = props => {
     searchInProgress,
     certificateFilter,
     yogaStylesFilter,
+    subjectsFilter,
     priceFilter,
     keywordFilter,
     isSearchFiltersPanelOpen,
@@ -73,6 +74,10 @@ const SearchFiltersComponent = props => {
     id: 'SearchFilters.yogaStylesLabel',
   });
 
+  const subjectsLabel = intl.formatMessage({
+    id: 'SearchFilters.subjectsLabel',
+  });
+
   const keywordLabel = intl.formatMessage({
     id: 'SearchFilters.keywordLabel',
   });
@@ -80,6 +85,10 @@ const SearchFiltersComponent = props => {
   const initialyogaStyles = yogaStylesFilter
     ? initialValues(urlQueryParams, yogaStylesFilter.paramName)
     : null;
+
+  const initialSubjects = subjectsFilter
+                          ? initialValues(urlQueryParams, subjectsFilter.paramName)
+                          : null;
 
   const initialcertificate = certificateFilter
     ? initialValue(urlQueryParams, certificateFilter.paramName)
@@ -156,6 +165,20 @@ const SearchFiltersComponent = props => {
     />
   ) : null;
 
+  const subjectsFilterElement = subjectsFilter ? (
+    <SelectMultipleFilter
+      id={'SearchFilters.subjectsFilter'}
+      name="subjects"
+      urlParam={subjectsFilter.paramName}
+      label={subjectsLabel}
+      onSubmit={handleSelectOptions}
+      showAsPopup
+      options={subjectsFilter.options}
+      initialValues={initialSubjects}
+      contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+    />
+  ) : null;
+
   const priceFilterElement = priceFilter ? (
     <PriceFilter
       id="SearchFilters.priceFilter"
@@ -202,11 +225,7 @@ const SearchFiltersComponent = props => {
   return (
     <div className={classes}>
       <div className={css.filters}>
-        {yogaStylesFilterElement}
-        {certificateFilterElement}
-        {priceFilterElement}
-        {keywordFilterElement}
-        {toggleSearchFiltersPanelButton}
+        {subjectsFilterElement}
       </div>
 
       {listingsAreLoaded && resultsCount > 0 ? (

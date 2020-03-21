@@ -53,6 +53,7 @@ export class SearchPageComponent extends Component {
 
   filters() {
     const {
+      subjectsConfig,
       certificateConfig,
       yogaStylesConfig,
       priceFilterConfig,
@@ -72,6 +73,10 @@ export class SearchPageComponent extends Component {
       yogaStylesFilter: {
         paramName: 'pub_yogaStyles',
         options: yogaStylesConfig,
+      },
+      subjectsFilter: {
+        paramName: 'pub_subjects',
+        options: subjectsConfig,
       },
       priceFilter: {
         paramName: 'price',
@@ -219,7 +224,7 @@ export class SearchPageComponent extends Component {
             searchParamsForPagination={parse(location.search)}
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             primaryFilters={{
-              yogaStylesFilter: filters.yogaStylesFilter,
+              subjectsFilter: filters.subjectsFilter,
               certificateFilter: filters.certificateFilter,
               priceFilter: filters.priceFilter,
               keywordFilter: filters.keywordFilter,
@@ -268,6 +273,7 @@ SearchPageComponent.defaultProps = {
   tab: 'listings',
   certificateConfig: config.custom.certificate,
   yogaStylesConfig: config.custom.yogaStyles,
+  subjectsConfig: config.custom.subjects,
   priceFilterConfig: config.custom.priceFilterConfig,
   keywordFilterConfig: config.custom.keywordFilterConfig,
   activeListingId: null,
@@ -287,6 +293,7 @@ SearchPageComponent.propTypes = {
   tab: oneOf(['filters', 'listings', 'map']).isRequired,
   certificateConfig: array,
   yogaStylesConfig: array,
+  subjectsConfig: array,
   priceFilterConfig: shape({
     min: number.isRequired,
     max: number.isRequired,

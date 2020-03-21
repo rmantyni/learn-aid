@@ -282,9 +282,7 @@ class SearchFiltersMobileComponent extends Component {
             </button>
           </div>
           {this.state.isFiltersOpenOnMobile ? (
-            <div className={css.filtersWrapper}>
-              {subjectsFilterElement}
-            </div>
+            <div className={css.filtersWrapper}>{subjectsFilterElement}</div>
           ) : null}
 
           <div className={css.showListingsContainer}>

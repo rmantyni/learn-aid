@@ -87,8 +87,8 @@ const SearchFiltersComponent = props => {
     : null;
 
   const initialSubjects = subjectsFilter
-                          ? initialValues(urlQueryParams, subjectsFilter.paramName)
-                          : null;
+    ? initialValues(urlQueryParams, subjectsFilter.paramName)
+    : null;
 
   const initialcertificate = certificateFilter
     ? initialValue(urlQueryParams, certificateFilter.paramName)
@@ -224,9 +224,7 @@ const SearchFiltersComponent = props => {
   ) : null;
   return (
     <div className={classes}>
-      <div className={css.filters}>
-        {subjectsFilterElement}
-      </div>
+      <div className={css.filters}>{subjectsFilterElement}</div>
 
       {listingsAreLoaded && resultsCount > 0 ? (
         <div className={css.searchResultSummary}>

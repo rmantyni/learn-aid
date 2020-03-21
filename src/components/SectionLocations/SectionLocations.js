@@ -27,9 +27,7 @@ const locationLink = (name, image, searchQuery) => {
           <LazyImage src={image} alt={name} className={css.locationImage} />
         </div>
       </div>
-      <div className={css.linkText}>
-        {nameText}
-      </div>
+      <div className={css.linkText}>{nameText}</div>
     </NamedLink>
   );
 };
@@ -45,41 +43,15 @@ const SectionLocations = props => {
         <FormattedMessage id="SectionLocations.title" />
       </div>
       <div className={css.locations}>
-        {locationLink(
-          'Matematiikka',
-          subjectImage,
-          '?pub_subjects=mathematics'
-        )}
-        {locationLink(
-          'Biologia',
-          subjectImage,
-          '?pub_subjects=biology'
-        )}
-        {locationLink(
-          'Maantietio',
-          subjectImage,
-          '?pub_subjects=geography'
-        )}
-
+        {locationLink('Matematiikka', subjectImage, '?pub_subjects=mathematics')}
+        {locationLink('Biologia', subjectImage, '?pub_subjects=biology')}
+        {locationLink('Maantietio', subjectImage, '?pub_subjects=geography')}
       </div>
 
       <div className={css.locations}>
-      {locationLink(
-        'Ruotsi',
-        subjectImage,
-        '?pub_subjects=swedish'
-      )}
-      {locationLink(
-        'Äidinkieli',
-        subjectImage,
-        '?pub_subjects=finnish'
-      )}
-      {locationLink(
-        'Historia',
-        subjectImage,
-        '?pub_subjects=history'
-      )}
-
+        {locationLink('Ruotsi', subjectImage, '?pub_subjects=swedish')}
+        {locationLink('Äidinkieli', subjectImage, '?pub_subjects=finnish')}
+        {locationLink('Historia', subjectImage, '?pub_subjects=history')}
       </div>
     </div>
   );

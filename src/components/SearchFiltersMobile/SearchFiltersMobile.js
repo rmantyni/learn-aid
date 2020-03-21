@@ -160,6 +160,7 @@ class SearchFiltersMobileComponent extends Component {
       selectedFiltersCount,
       certificateFilter,
       yogaStylesFilter,
+      subjectsFilter,
       priceFilter,
       keywordFilter,
       intl,
@@ -202,20 +203,20 @@ class SearchFiltersMobileComponent extends Component {
       />
     ) : null;
 
-    const yogaStylesLabel = intl.formatMessage({ id: 'SearchFiltersMobile.yogaStylesLabel' });
+    const subjectsLabel = intl.formatMessage({ id: 'SearchFiltersMobile.subjectsLabel' });
 
-    const initialyogaStyles = this.initialValues(yogaStylesFilter.paramName);
+    const initialSubjects = this.initialValues(subjectsFilter.paramName);
 
-    const yogaStylesFilterElement = yogaStylesFilter ? (
+    const subjectsFilterElement = subjectsFilter ? (
       <SelectMultipleFilter
-        id="SearchFiltersMobile.yogaStylesFilter"
-        name="yogaStyles"
-        urlParam={yogaStylesFilter.paramName}
-        label={yogaStylesLabel}
+        id="SearchFiltersMobile.subjectsFilter"
+        name="subjects"
+        urlParam={subjectsFilter.paramName}
+        label={subjectsLabel}
         onSubmit={this.handleSelectMultiple}
         liveEdit
-        options={yogaStylesFilter.options}
-        initialValues={initialyogaStyles}
+        options={subjectsFilter.options}
+        initialValues={initialSubjects}
       />
     ) : null;
 
@@ -282,10 +283,7 @@ class SearchFiltersMobileComponent extends Component {
           </div>
           {this.state.isFiltersOpenOnMobile ? (
             <div className={css.filtersWrapper}>
-              {keywordFilterElement}
-              {yogaStylesFilterElement}
-              {certificateFilterElement}
-              {priceFilterElement}
+              {subjectsFilterElement}
             </div>
           ) : null}
 

@@ -7,11 +7,7 @@ import omit from 'lodash/omit';
 
 import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString } from '../../util/routes';
-import {
-  ModalInMobile,
-  Button,
-  SelectMultipleFilter,
-} from '../../components';
+import { ModalInMobile, Button, SelectMultipleFilter } from '../../components';
 import { propTypes } from '../../util/types';
 import css from './SearchFiltersMobile.css';
 
@@ -225,9 +221,7 @@ class SearchFiltersMobileComponent extends Component {
             </button>
           </div>
           {this.state.isFiltersOpenOnMobile ? (
-            <div className={css.filtersWrapper}>
-              {subjectsFilterElement}
-            </div>
+            <div className={css.filtersWrapper}>{subjectsFilterElement}</div>
           ) : null}
 
           <div className={css.showListingsContainer}>

@@ -2,6 +2,15 @@
  * Marketplace specific configuration.
  */
 
+export const subjects = [
+  { key: 'mathematics', label: 'Matematiikka' },
+  { key: 'biology', label: 'Biologia' },
+  { key: 'geography', label: 'Maantieto' },
+  { key: 'swedish', label: 'Ruotsi' },
+  { key: 'finnish', label: 'Äidinkieli' },
+  { key: 'history', label: 'Historia' },
+];
+
 export const yogaStyles = [
   { key: 'ashtanga', label: 'Ashtanga' },
   { key: 'hatha', label: 'Hatha' },

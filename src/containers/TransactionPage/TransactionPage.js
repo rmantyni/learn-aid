@@ -106,31 +106,6 @@ export const TransactionPageComponent = props => {
     );
   };
 
-  // If payment is pending, redirect to CheckoutPage
-  if (
-    txIsPaymentPending(currentTransaction) &&
-    isCustomerRole &&
-    currentTransaction.attributes.lineItems
-  ) {
-    const currentBooking = ensureListing(currentTransaction.booking);
-
-    const initialValues = {
-      listing: currentListing,
-      // Transaction with payment pending should be passed to CheckoutPage
-      transaction: currentTransaction,
-      // Original bookingData content is not available,
-      // but it is already used since booking is created.
-      // (E.g. quantity is used when booking is created.)
-      bookingData: {},
-      bookingDates: {
-        bookingStart: currentBooking.attributes.start,
-        bookingEnd: currentBooking.attributes.end,
-      },
-    };
-
-    redirectToCheckoutPageWithInitialValues(initialValues, currentListing);
-  }
-
   // Customer can create a booking, if the tx is in "enquiry" state.
   const handleSubmitBookingRequest = values => {
     const { bookingStartTime, bookingEndTime, ...restOfValues } = values;

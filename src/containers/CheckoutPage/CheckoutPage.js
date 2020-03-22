@@ -3,6 +3,7 @@ import { bool, func, instanceOf, object, oneOfType, shape, string } from 'prop-t
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
+import { Form as FinalForm } from 'react-final-form';
 import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 import config from '../../config';
@@ -34,10 +35,12 @@ import { TRANSITION_ENQUIRE, txIsPaymentPending, txIsPaymentExpired } from '../.
 import {
   AvatarMedium,
   BookingBreakdown,
+  Form,
   Logo,
   NamedLink,
   NamedRedirect,
   Page,
+  PrimaryButton,
   ResponsiveImage,
 } from '../../components';
 import { StripePaymentForm } from '../../forms';
@@ -379,7 +382,41 @@ export class CheckoutPageComponent extends Component {
     return handlePaymentIntentCreation(orderParams);
   }
 
-  handleSubmit(values) {
+  handleSubmit(orderId) {
+//    this.setState({ submitting: true });
+
+    const { history, dispatch, speculatedTransaction: tx, currentUser, onInitiateOrder,} = this.props;
+    const pageData = this.state.pageData
+
+    const orderParams = {
+      listingId: pageData.listing.id,
+      bookingStart: tx.booking.attributes.start,
+      bookingEnd: tx.booking.attributes.end,
+    };
+    console.log('orderParams:', orderParams);
+    onInitiateOrder(orderParams, null)
+      .then(res => {
+        const { id } = res;
+        console.log('response', res);
+
+        this.setState({ submitting: false });
+        const routes = routeConfiguration();
+        const orderDetailsPath = pathByRouteName('OrderDetailsPage', routes, { id: id.uuid });
+
+        const initialValues = {};
+        initializeOrderPage(initialValues, routes, dispatch);
+        clearData(STORAGE_KEY);
+        history.push(orderDetailsPath);
+      })
+
+//    const initialMessageFailedToTransaction = messageSuccess ? null : orderId;
+//    const initialValues = {
+//      initialMessageFailedToTransaction,
+//      savePaymentMethodFailed: !paymentMethodSaved,
+//    };
+  }
+
+  handleSubmitWithPayments(values) {
     if (this.state.submitting) {
       return;
     }
@@ -602,15 +639,17 @@ export class CheckoutPageComponent extends Component {
 
     // Allow showing page when currentUser is still being downloaded,
     // but show payment form only when user info is loaded.
-    const showPaymentForm = !!(
-      currentUser &&
-      hasRequiredData &&
-      !listingNotFound &&
-      !initiateOrderError &&
-      !speculateTransactionError &&
-      !retrievePaymentIntentError &&
-      !isPaymentExpired
-    );
+    //const showPaymentForm = !!(
+    //  currentUser &&
+    //  hasRequiredData &&
+    //  !listingNotFound &&
+    //  !initiateOrderError &&
+    //  !speculateTransactionError &&
+    //  !retrievePaymentIntentError &&
+    //  !isPaymentExpired
+    //);
+
+    const showPaymentForm = false;
 
     const firstImage =
       currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
@@ -723,8 +762,6 @@ export class CheckoutPageComponent extends Component {
       : 'CheckoutPage.perUnit';
 
     const price = currentListing.attributes.price;
-    const formattedPrice = formatMoney(intl, price);
-    const detailsSubTitle = `${formattedPrice} ${intl.formatMessage({ id: unitTranslationKey })}`;
 
     const showInitialMessageInput = !(
       existingTransaction && existingTransaction.attributes.lastTransition === TRANSITION_ENQUIRE
@@ -783,6 +820,7 @@ export class CheckoutPageComponent extends Component {
                   />
                 </p>
               ) : null}
+
               {showPaymentForm ? (
                 <StripePaymentForm
                   className={css.paymentForm}
@@ -813,6 +851,37 @@ export class CheckoutPageComponent extends Component {
                   />
                 </p>
               ) : null}
+
+              <FinalForm
+                onSubmit={this.handleSubmit}
+                inProgress={this.state.submitting}
+                render={formRenderProps => {
+                const {
+                  handleSubmit,
+                  inProgress,
+                } = formRenderProps;
+
+                return (
+                  <Form onSubmit={handleSubmit}>
+
+                    <PrimaryButton
+                    className={css.submitButton}
+                    type="submit"
+                    inProgress={inProgress}
+                    >
+                      <FormattedMessage id="CheckoutPage.book" />
+                    </PrimaryButton>
+
+                  </Form>
+                )}}
+                />
+
+
+
+
+
+
+
             </section>
           </div>
 
@@ -830,7 +899,7 @@ export class CheckoutPageComponent extends Component {
             </div>
             <div className={css.detailsHeadings}>
               <h2 className={css.detailsTitle}>{listingTitle}</h2>
-              <p className={css.detailsSubtitle}>{detailsSubTitle}</p>
+              <p className={css.detailsSubtitle}>{"sub title"}</p>
             </div>
             {speculateTransactionErrorMessage}
             {breakdown}

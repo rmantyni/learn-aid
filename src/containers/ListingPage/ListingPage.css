@@ -121,6 +121,8 @@
 
   transition: var(--transitionStyleButton);
 
+  @apply --backgroundImage;
+
   @media (--viewportMedium) {
     position: static;
     top: auto;

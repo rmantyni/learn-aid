@@ -40,19 +40,9 @@ const SectionImages = props => {
   return (
     <div className={css.sectionImages}>
       <div className={css.threeToTwoWrapper}>
-        <div className={css.aspectWrapper} onClick={handleViewPhotosClick}>
+        <div className={css.aspectWrapper}>
           {actionBar}
-          <ResponsiveImage
-            rootClassName={css.rootForImage}
-            alt={title}
-            image={firstImage}
-            variants={[
-              'landscape-crop',
-              'landscape-crop2x',
-              'landscape-crop4x',
-              'landscape-crop6x',
-            ]}
-          />
+          <div className={css.rootForImage} />
           {viewPhotosButton}
         </div>
       </div>

@@ -10,6 +10,13 @@ import css from './SectionLocations.css';
 
 import subjectImage from './images/anni.jpg';
 
+import mathImage from './images/math.jpg';
+import bioImage from './images/bio1.jpg';
+import geoImage from './images/geo.jpg';
+import sweImage from './images/subject1.jpg';
+import fiImage from './images/subject2.jpg';
+import historyImage from './images/subject2.jpg';
+
 class LocationImage extends Component {
   render() {
     const { alt, ...rest } = this.props;
@@ -43,15 +50,15 @@ const SectionLocations = props => {
         <FormattedMessage id="SectionLocations.title" />
       </div>
       <div className={css.locations}>
-        {locationLink('Matematiikka', subjectImage, '?pub_subjects=mathematics')}
-        {locationLink('Biologia', subjectImage, '?pub_subjects=biology')}
-        {locationLink('Maantietio', subjectImage, '?pub_subjects=geography')}
+        {locationLink('Matematiikka', mathImage, '?pub_subjects=mathematics')}
+        {locationLink('Biologia', bioImage, '?pub_subjects=biology')}
+        {locationLink('Maantietio', geoImage, '?pub_subjects=geography')}
       </div>
 
       <div className={css.locations}>
-        {locationLink('Ruotsi', subjectImage, '?pub_subjects=swedish')}
-        {locationLink('Äidinkieli', subjectImage, '?pub_subjects=finnish')}
-        {locationLink('Historia', subjectImage, '?pub_subjects=history')}
+        {locationLink('Ruotsi', sweImage, '?pub_subjects=swedish')}
+        {locationLink('Äidinkieli', fiImage, '?pub_subjects=finnish')}
+        {locationLink('Historia', historyImage, '?pub_subjects=history')}
       </div>
     </div>
   );

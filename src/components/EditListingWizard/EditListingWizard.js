@@ -29,16 +29,13 @@ import EditListingWizardTab, {
 } from './EditListingWizardTab';
 import css from './EditListingWizard.css';
 
-// Show availability calendar only if environment variable availabilityEnabled is true
-const availabilityMaybe = config.enableAvailability ? [AVAILABILITY] : [];
-
 // You can reorder these panels.
 // Note 1: You need to change save button translations for new listing flow
 // Note 2: Ensure that draft listing is created after the first panel
 // and listing publishing happens after last panel.
 // Note 3: in FTW-hourly template we don't use the POLICY tab so it's commented out.
 // If you want to add a free text field to your listings you can enable the POLICY tab
-export const TABS = [DESCRIPTION, FEATURES, ...availabilityMaybe];
+export const TABS = [DESCRIPTION, FEATURES, AVAILABILITY];
 
 // Tabs are horizontal in small screens
 const MAX_HORIZONTAL_NAV_SCREEN_WIDTH = 1023;
@@ -90,7 +87,7 @@ const tabCompleted = (tab, listing) => {
     case DESCRIPTION:
       return !!(description && title);
     case FEATURES:
-      return !!(publicData && publicData.yogaStyles);
+      return !!(publicData && publicData.subjects);
     case POLICY:
       return !!(publicData && typeof publicData.rules !== 'undefined');
     case LOCATION:
@@ -411,43 +408,7 @@ class EditListingWizard extends Component {
                 <p className={css.modalMessage}>
                   <FormattedMessage id="EditListingWizard.payoutModalInfo" />
                 </p>
-                <StripeConnectAccountForm
-                  disabled={formDisabled}
-                  inProgress={payoutDetailsSaveInProgress}
-                  ready={payoutDetailsSaved}
-                  currentUser={ensuredCurrentUser}
-                  stripeBankAccountLastDigits={getBankAccountLast4Digits(stripeAccountData)}
-                  savedCountry={savedCountry}
-                  submitButtonText={intl.formatMessage({
-                    id: 'StripePayoutPage.submitButtonText',
-                  })}
-                  stripeAccountError={stripeAccountError}
-                  stripeAccountFetched={stripeAccountFetched}
-                  stripeAccountLinkError={stripeAccountLinkError}
-                  onChange={onPayoutDetailsFormChange}
-                  onSubmit={rest.onPayoutDetailsSubmit}
-                  onGetStripeConnectAccountLink={handleGetStripeConnectAccountLink}
-                  stripeConnected={stripeConnected}
-                >
-                  {stripeConnected && !returnedAbnormallyFromStripe && showVerificationNeeded ? (
-                    <StripeConnectAccountStatusBox
-                      type="verificationNeeded"
-                      inProgress={getAccountLinkInProgress}
-                      onGetStripeConnectAccountLink={handleGetStripeConnectAccountLink(
-                        'custom_account_verification'
-                      )}
-                    />
-                  ) : stripeConnected && savedCountry && !returnedAbnormallyFromStripe ? (
-                    <StripeConnectAccountStatusBox
-                      type="verificationSuccess"
-                      inProgress={getAccountLinkInProgress}
-                      disabled={payoutDetailsSaveInProgress}
-                      onGetStripeConnectAccountLink={handleGetStripeConnectAccountLink(
-                        'custom_account_update'
-                      )}
-                    />
-                  ) : null}
-                </StripeConnectAccountForm>
+
               </>
             )}
           </div>

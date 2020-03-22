@@ -1,13 +1,12 @@
 import React from 'react';
 import { FormattedMessage } from '../../util/reactIntl';
-import { ResponsiveImage, Modal, ImageCarousel } from '../../components';
+import { Modal, ImageCarousel } from '../../components';
 import ActionBarMaybe from './ActionBarMaybe';
 
 import css from './ListingPage.css';
 
 const SectionImages = props => {
   const {
-    title,
     listing,
     isOwnListing,
     editParams,
@@ -18,7 +17,6 @@ const SectionImages = props => {
   } = props;
 
   const hasImages = listing.images && listing.images.length > 0;
-  const firstImage = hasImages ? listing.images[0] : null;
 
   // Action bar is wrapped with a div that prevents the click events
   // to the parent that would otherwise open the image carousel

@@ -13,16 +13,6 @@ import {
 } from '../../util/types';
 
 import LineItemBookingPeriod from './LineItemBookingPeriod';
-import LineItemBasePriceMaybe from './LineItemBasePriceMaybe';
-import LineItemUnitPriceMaybe from './LineItemUnitPriceMaybe';
-import LineItemSubTotalMaybe from './LineItemSubTotalMaybe';
-import LineItemCustomerCommissionMaybe from './LineItemCustomerCommissionMaybe';
-import LineItemCustomerCommissionRefundMaybe from './LineItemCustomerCommissionRefundMaybe';
-import LineItemProviderCommissionMaybe from './LineItemProviderCommissionMaybe';
-import LineItemProviderCommissionRefundMaybe from './LineItemProviderCommissionRefundMaybe';
-import LineItemRefundMaybe from './LineItemRefundMaybe';
-import LineItemTotalPrice from './LineItemTotalPrice';
-import LineItemUnknownItemsMaybe from './LineItemUnknownItemsMaybe';
 
 import css from './BookingBreakdown.css';
 
@@ -34,7 +24,6 @@ export const BookingBreakdownComponent = props => {
     unitType,
     transaction,
     booking,
-    intl,
     dateType,
     timeZone,
   } = props;

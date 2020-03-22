@@ -192,7 +192,6 @@ export class ListingPageComponent extends Component {
       sendEnquiryError,
       monthlyTimeSlots,
       certificateConfig,
-      yogaStylesConfig,
       subjectsConfig,
     } = this.props;
 

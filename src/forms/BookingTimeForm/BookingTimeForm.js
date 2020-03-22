@@ -6,7 +6,6 @@ import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { calculateQuantityFromHours, timestampToDate } from '../../util/dates';
 import { propTypes } from '../../util/types';
-import config from '../../config';
 import { Form, PrimaryButton } from '../../components';
 import EstimatedBreakdownMaybe from './EstimatedBreakdownMaybe';
 import FieldDateAndTimeInput from './FieldDateAndTimeInput';
@@ -44,7 +43,6 @@ export class BookingTimeFormComponent extends Component {
             isOwnListing,
             listingId,
             submitButtonWrapperClassName,
-            unitPrice,
             unitType,
             values,
             monthlyTimeSlots,

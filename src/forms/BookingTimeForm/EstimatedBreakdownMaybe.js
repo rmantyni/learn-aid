@@ -30,21 +30,11 @@ import Decimal from 'decimal.js';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { TRANSITION_REQUEST_PAYMENT, TX_TRANSITION_ACTOR_CUSTOMER } from '../../util/transaction';
 import { LINE_ITEM_UNITS } from '../../util/types';
-import { unitDivisor, convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
 import { BookingBreakdown } from '../../components';
 
 import css from './BookingTimeForm.css';
 
-const { Money, UUID } = sdkTypes;
-
-const estimatedTotalPrice = (unitPrice, unitCount) => {
-  const numericPrice = convertMoneyToNumber(unitPrice);
-  const numericTotalPrice = new Decimal(numericPrice).times(unitCount).toNumber();
-  return new Money(
-    convertUnitToSubUnit(numericTotalPrice, unitDivisor(unitPrice.currency)),
-    unitPrice.currency
-  );
-};
+const { UUID } = sdkTypes;
 
 // When we cannot speculatively initiate a transaction (i.e. logged
 // out), we must estimate the booking breakdown. This function creates

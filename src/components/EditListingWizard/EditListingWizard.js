@@ -15,8 +15,7 @@ import {
 } from '../../util/urlHelpers';
 import { ensureCurrentUser, ensureListing } from '../../util/data';
 
-import { Modal, NamedRedirect, Tabs, StripeConnectAccountStatusBox } from '../../components';
-import { StripeConnectAccountForm } from '../../forms';
+import { Modal, NamedRedirect, Tabs } from '../../components';
 
 import EditListingWizardTab, {
   AVAILABILITY,
@@ -146,12 +145,6 @@ const createReturnURL = (returnURLType, rootURL, routes, pathParams) => {
 // Get attribute: stripeAccountData
 const getStripeAccountData = stripeAccount => stripeAccount.attributes.stripeAccountData || null;
 
-// Get last 4 digits of bank account returned in Stripe account
-const getBankAccountLast4Digits = stripeAccountData =>
-  stripeAccountData && stripeAccountData.external_accounts.data.length > 0
-    ? stripeAccountData.external_accounts.data[0].last4
-    : null;
-
 // Check if there's requirements on selected type: 'past_due', 'currently_due' etc.
 const hasRequirements = (stripeAccountData, requirementType) =>
   stripeAccountData != null &&
@@ -205,7 +198,7 @@ class EditListingWizard extends Component {
   }
 
   handlePublishListing(id) {
-    const { onPublishListingDraft, currentUser, stripeAccount } = this.props;
+    const { onPublishListingDraft, currentUser } = this.props;
 
     if (currentUser) {
       onPublishListingDraft(id);
@@ -304,7 +297,6 @@ class EditListingWizard extends Component {
         this.setState({ portalRoot: document.getElementById('portal-root') });
       }
     };
-    const formDisabled = getAccountLinkInProgress;
     const ensuredCurrentUser = ensureCurrentUser(currentUser);
     const currentUserLoaded = !!ensuredCurrentUser.id;
     const stripeConnected = currentUserLoaded && !!stripeAccount && !!stripeAccount.id;
@@ -333,8 +325,6 @@ class EditListingWizard extends Component {
       (hasRequirements(stripeAccountData, 'past_due') ||
         hasRequirements(stripeAccountData, 'currently_due'));
 
-    const savedCountry = stripeAccountData ? stripeAccountData.country : null;
-
     const handleGetStripeConnectAccountLink = handleGetStripeConnectAccountLinkFn(
       onGetStripeConnectAccountLink,
       {
@@ -346,7 +336,6 @@ class EditListingWizard extends Component {
 
     const returnedNormallyFromStripe = returnURLType === STRIPE_ONBOARDING_RETURN_URL_SUCCESS;
     const returnedAbnormallyFromStripe = returnURLType === STRIPE_ONBOARDING_RETURN_URL_FAILURE;
-    const showVerificationNeeded = stripeConnected && requirementsMissing;
 
     // Redirect from success URL to basic path for StripePayoutPage
     if (returnedNormallyFromStripe && stripeConnected && !requirementsMissing) {

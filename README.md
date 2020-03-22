@@ -1,11 +1,13 @@
-# Sharetribe Flex Template for Web: time-based process
+# LearnAid - a platform to connect volunteers with kids at home school
+
+See POC application: https://learn-aid.herokuapp.com/
 
 [![CircleCI](https://circleci.com/gh/sharetribe/ftw-hourly.svg?style=svg)](https://circleci.com/gh/sharetribe/ftw-hourly)
 
 > **Note** If you are using day-based booking process (i.e. daily or nightly bookings), you should
 > choose the original [Flex Template for Web](https://github.com/sharetribe/ftw-daily/) instead.
 
-This is a template web application for a Sharetribe Flex marketplace using **time-based booking
+This is a marketplace UI built on top of a template web application for a Sharetribe Flex marketplace using **time-based booking
 process**. This repository is a fork from the existing
 [FTW repository](https://github.com/sharetribe/ftw-hourly) (which is using nightly booking process).
 So, if you have started working with the original FTW repository and you want to change to

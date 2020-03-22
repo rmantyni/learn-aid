@@ -373,8 +373,6 @@ propTypes.transaction = shape({
         code: requiredLineItemPropType,
         includeFor: arrayOf(oneOf(['customer', 'provider'])).isRequired,
         quantity: instanceOf(Decimal),
-        unitPrice: propTypes.money.isRequired,
-        lineTotal: propTypes.money.isRequired,
         reversal: bool.isRequired,
       })
     ),

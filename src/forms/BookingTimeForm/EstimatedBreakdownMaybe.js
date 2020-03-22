@@ -51,7 +51,6 @@ const estimatedTotalPrice = (unitPrice, unitCount) => {
 // an estimated transaction object for that use case.
 const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, quantity) => {
   const now = new Date();
-  const totalPrice = estimatedTotalPrice(unitPrice, quantity);
 
   return {
     id: new UUID('estimated-transaction'),
@@ -60,15 +59,12 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, qua
       createdAt: now,
       lastTransitionedAt: now,
       lastTransition: TRANSITION_REQUEST_PAYMENT,
-      payinTotal: totalPrice,
-      payoutTotal: totalPrice,
       lineItems: [
         {
           code: unitType,
           includeFor: ['customer', 'provider'],
           unitPrice: unitPrice,
           quantity: new Decimal(quantity),
-          lineTotal: totalPrice,
           reversal: false,
         },
       ],
@@ -96,7 +92,7 @@ const EstimatedBreakdownMaybe = props => {
 
   const isUnits = unitType === LINE_ITEM_UNITS;
   const quantityIfUsingUnits = !isUnits || Number.isInteger(quantity);
-  const canEstimatePrice = startDate && endDate && unitPrice && quantityIfUsingUnits;
+  const canEstimatePrice = startDate && endDate && quantityIfUsingUnits;
   if (!canEstimatePrice) {
     return null;
   }

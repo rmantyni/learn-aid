@@ -34,6 +34,7 @@ const SectionImages = props => {
         id="ListingPage.viewImagesButton"
         values={{ count: listing.images.length }}
       />
+      unitPrice,
     </button>
   ) : null;
 

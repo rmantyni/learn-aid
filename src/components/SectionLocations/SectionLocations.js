@@ -8,14 +8,12 @@ import { NamedLink } from '../../components';
 
 import css from './SectionLocations.css';
 
-import subjectImage from './images/anni.jpg';
-
 import mathImage from './images/math.jpg';
 import bioImage from './images/bio1.jpg';
 import geoImage from './images/geo.jpg';
-import sweImage from './images/subject1.jpg';
-import fiImage from './images/subject2.jpg';
-import historyImage from './images/subject2.jpg';
+import sweImage from './images/swe.jpg';
+import fiImage from './images/fi.jpg';
+import historyImage from './images/history.jpg';
 
 class LocationImage extends Component {
   render() {

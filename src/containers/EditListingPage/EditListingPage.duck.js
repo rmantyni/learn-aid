@@ -571,8 +571,14 @@ export const loadData = params => (dispatch, getState, sdk) => {
       // Because of two dispatch functions, response is an array.
       // sWe are only interest the response from requestShowListing here,
       // so we need to pick the first one
-      if (response[0].data && response[0].data.data) {
+      if (response[0].data &&
+          response[0].data.data &&
+          response[0].data.data.attributes &&
+          response[0].data.data.attributes.availabilityPlan &&
+          response[0].data.data.attributes.availabilityPlan.timezone
+         ) {
         const listing = response[0].data.data;
+
         const tz = listing.attributes.availabilityPlan.timezone;
 
         const today = new Date();

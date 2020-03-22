@@ -10,8 +10,8 @@ import { metaTagProps } from '../../util/seo';
 import { canonicalRoutePath } from '../../util/routes';
 import { CookieConsent } from '../../components';
 
-import facebookImage from '../../assets/yogatimeFacebook-1200x630.jpg';
-import twitterImage from '../../assets/yogatimeTwitter-600x314.jpg';
+import facebookImage from '../../assets/learn-aid-facebook.png';
+import twitterImage from '../../assets/learn-aid-twitter.png';
 import css from './Page.css';
 
 const preventDefault = e => {
@@ -20,9 +20,9 @@ const preventDefault = e => {
 
 const twitterPageURL = siteTwitterHandle => {
   if (siteTwitterHandle && siteTwitterHandle.charAt(0) === '@') {
-    return `https://twitter.com/${siteTwitterHandle.substring(1)}`;
+    return `https://twitter.com/`;
   } else if (siteTwitterHandle) {
-    return `https://twitter.com/${siteTwitterHandle}`;
+    return `https://twitter.com/`;
   }
   return null;
 };
